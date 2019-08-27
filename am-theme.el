@@ -2,7 +2,7 @@
 
 (setq am-theme-alist (list 'default))
 (setq *current-theme* 'default)
-(setq *current* 0)
+(setq *current* -1)
 
 ;; Disable other themes before loading new one
 (defadvice load-theme (before theme-dont-propagate activate)
@@ -23,8 +23,7 @@
 (defun am-change-theme ()
   (interactive)
   (setq *current* (1+ *current*))
-  (if (< *current* (length am-theme-alist))
-      nil (setq *current* 0))
+  (if (< *current* (length am-theme-alist)) nil (setq *current* 0))
   (am-next-theme (nth *current* am-theme-alist)))
 
 (provide 'am-theme)

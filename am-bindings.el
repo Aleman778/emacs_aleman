@@ -28,10 +28,16 @@
 ;; Ripgrep regex search (Alt-s)
 (global-set-key (kbd "M-s") 'ripgrep-regexp)
 
+;; Hippie expand (Alt-/)
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; Projectile find file (Alt-Ctrl-f)
+(global-set-key (kbd "M-C-f") 'projectile-find-file)
+
 ;; Comment or uncomment line (Ctrl-])
 (global-set-key (kbd "C-]") 'comment-line)
 
-;; Insert region comment (Ctrl-c k)
+;; Insert region comment (Alt-])
 (global-set-key (kbd "M-]") 'comment-region)
 
 ;; Insert documentation comment (Alt-Ctrl-k)

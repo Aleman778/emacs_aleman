@@ -76,11 +76,11 @@
 ;; Maximize the frame on startup
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;; Hippie expand
-(global-set-key (kbd "M-/") 'hippie-expand)
-
 ;; Enable ido mode
 (ido-mode 1)
+
+;; Enable projectile mode
+(projectile-mode 1)
 
 ;; Disable ido mode from merging files from other directories
 (setq ido-auto-merge-work-directories-length -1)
