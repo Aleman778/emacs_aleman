@@ -47,3 +47,5 @@
   (let ((default-directory project-directory))
     (async-shell-command "bin\\debug-windows-x86_64\\Sandbox\\Sandbox.exe"
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+
+(provide 'cpp-compile)

@@ -36,6 +36,7 @@
                 (inclass . +)
                 (inher-cont . c-lineup-multi-inher)
                 (arglist-cont-nonempty . +)
+                (brace-list-open . +)
                 (brace-list-entry . am-c-lineup-under-anchor)
                 (template-args-cont . +)
                 (comment-intro . 0)

@@ -5,7 +5,13 @@
 
 ;; Compilation configurations
 
+(setq project-directory "C:\\dev\\am-engine")
+(setq premake5-target "vs2019")
 (setq am-compile-default-mode "c++")
+
+;; Require major-mode implementations
+
+(require 'cpp-compile)
 
 ;; Generic compilation functions
 
@@ -59,7 +65,7 @@
 
 (defun funcall-major-mode (funcname)
   (setq func (concat (buffer-mode) "-" funcname))
-  (setq def-func (concat default-major-mode "-" funcname))
+  (setq def-func (concat am-compile-default-mode "-" funcname))
   (let ((f-int (intern func))
         (f-def-int (intern def-func)))
     (if (fboundp f-int) (funcall f-int) (funcall f-def-int))))
