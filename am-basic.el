@@ -86,7 +86,7 @@
 ;; Disable ido mode from merging files from other directories
 (setq ido-auto-merge-work-directories-length -1)
 
-;; Add h files to c++ mode instead of c mode
+;; Add .h files to c++ mode instead of c mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; Set background color to reduce blue light
