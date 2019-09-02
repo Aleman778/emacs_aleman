@@ -29,7 +29,7 @@
   (if (eq rust-cargo-project nil)
       (setq rust-cargo-project (rust-find-cargo-folder (rust-current-file))))
   (setq compilation-exit-message-function 'rust-cargo-run-if-compilation-ok)
-  (rust-cargo-build 'rust-cargo-project))
+  (rust-cargo-build rust-cargo-project))
 
 
 (defun rust-run ()
@@ -64,26 +64,26 @@
 
 (defun rust-cargo-build (project)
   "Builds the rust project, using the cargo build system"
-  (let ((defalt-directory project))
+  (let ((default-directory project))
     (compile (concat rust-cargo-command " build"))))
 
 
 (defun rust-cargo-build-release (project)
   "Builds the rust project in release mode, using the cargo build system"
-  (let ((defalt-directory project))
+  (let ((default-directory project))
     (compile (concat rust-cargo-command " build --release"))))
   
 
 (defun rust-cargo-run (project)
   "Runs the rust project, using the cargo build system"
-  (let ((defalt-directory project))
+  (let ((default-directory project))
     (async-shell-command (concat rust-cargo-command " run")
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
 
 
 (defun rust-cargo-check (project)
   "Checks the rust project, using the cargo build system"
-  (let ((defalt-directory project))
+  (let ((default-directory project))
     (async-shell-command (concat rust-cargo-command " check")
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
   
@@ -100,7 +100,7 @@
 (defun rust-cargo-run-if-compilation-ok (status code msg)
   "Checks if the given compilation was successfull"
   (if (and (eq status 'exit) (zerop code))
-      (rust-cargo-run 'rust-cargo-project))
+      (rust-cargo-run rust-cargo-project))
   (cons msg code))
 
 
