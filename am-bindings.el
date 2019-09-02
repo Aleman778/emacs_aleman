@@ -106,7 +106,10 @@
             (local-set-key (kbd "M-C-p") 'rust-run)
 
             ;; Compile current file (Alt-p)
-            (local-set-key (kbd "M-p") 'rust-run-current-file)))
+            (local-set-key (kbd "M-p") 'rust-run-current-file)
+
+            ;; Run test cases for current project (Ctrl-c v)
+            (local-set-key (kbd "C-c v") 'rust-test)))
 
 
 (provide 'am-bindings)

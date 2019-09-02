@@ -44,7 +44,16 @@
   "Runs the current buffers rust file always even if it belongs to a cargo project."
   (interactive)
   (rust-run-file (rust-current-file)))
-  
+
+
+(defun rust-test ()
+  "Runs the test cases in the current buffer rust project"
+  (interactive)
+  (setq rust-cargo-project (rust-find-cargo-folder (rust-current-file)))
+  (if (eq rust-cargo-project nil)
+      (error "Not inside a rust cargo module.")
+    (rust-cargo-test (rust-find-cargo-folder (rust-current-file)))))
+
 
 ;; Standard compile file functions
 
@@ -85,6 +94,13 @@
   "Checks the rust project, using the cargo build system"
   (let ((default-directory project))
     (async-shell-command (concat rust-cargo-command " check")
+                         (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+
+
+(defun rust-cargo-test (project)
+  "Run test cases in the rust project, using the cargo build system"
+  (let ((default-directory project))
+    (async-shell-command (concat rust-cargo-command " test")
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
   
 
