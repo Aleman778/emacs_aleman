@@ -1,6 +1,6 @@
 ;; Elisp functions used for compiling rust code
 
-;; Rust compiler paramters
+;; Rust compiler parameters
 
 (setq rust-compile-command "rustc")
 (setq rust-run-command "./")
@@ -35,8 +35,10 @@
 (defun rust-run ()
   "Runs the current buffers rust file or project."
   (interactive)
-  (let ((project (rust-find-cargo-folder (rust-current-file))))
-    (if (eq project nil) (rust-run-file (rust-current-file))
+  (let ((project (rust-find-cargo-folder (rust-current-file)))
+        (example (rust-find-examples-folder (rust-current-file))))
+    (if (eq project nil) (if (eq example nil) (rust-run-file (rust-current-file))
+                           (rust-cargo-example example (file-name-sans-extension (file-name-nondirectory (rust-current-file)))))
       (rust-cargo-build-and-run))))
 
 
@@ -52,7 +54,7 @@
   (setq rust-cargo-project (rust-find-cargo-folder (rust-current-file)))
   (if (eq rust-cargo-project nil)
       (error "Not inside a rust cargo module.")
-    (rust-cargo-test (rust-find-cargo-folder (rust-current-file)))))
+    (rust-cargo-test rust-cargo-project)))
 
 
 ;; Standard compile file functions
@@ -102,6 +104,14 @@
   (let ((default-directory project))
     (async-shell-command (concat rust-cargo-command " test")
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+
+
+(defun rust-cargo-example (project example)
+  "Run specific example in the rust project, using the cargo build system"
+  (let ((default-directory project))
+    (async-shell-command (concat rust-cargo-command " run --example " example)
+                         (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+
   
 
 ;; Utility functions
@@ -132,5 +142,9 @@
       (if (eq (file-exists-p (concat prj-folder "Cargo.toml")) t)
           (substring prj-folder 0 -1) nil))))
 
+
+(defun rust-find-examples-folder (file)
+  (let ((ex-folder (substring file 0 (+ 8 (string-match-p (regexp-quote "examples") file)))))
+    (if (eq ex-folder nil) nil ex-folder)))
 
 (provide 'rust-compile)
