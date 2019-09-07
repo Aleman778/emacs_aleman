@@ -39,7 +39,8 @@
         (example (rust-find-examples-folder (rust-current-file))))
     (if (eq project nil) (if (eq example nil) (rust-run-file (rust-current-file))
                            (rust-cargo-example example (file-name-sans-extension (file-name-nondirectory (rust-current-file)))))
-      (rust-cargo-build-and-run))))
+      (progn (setq rust-cargo-project project)
+             (rust-cargo-build-and-run)))))
 
 
 (defun rust-run-current-file ()
@@ -144,7 +145,7 @@
 
 
 (defun rust-find-examples-folder (file)
-  (let ((ex-folder (substring file 0 (+ 8 (string-match-p (regexp-quote "examples") file)))))
+  (let ((ex-folder (substring file 0 (string-match-p (regexp-quote "examples") file))))
     (if (eq ex-folder nil) nil ex-folder)))
 
 (provide 'rust-compile)
