@@ -50,6 +50,9 @@
 ;; Change the current theme (Ctrl-c Ctrl-t)
 (global-set-key (kbd "C-c C-t") 'am-change-theme)
 
+;; Magit Status
+(global-set-key (kbd "C-c s") 'magit-status)
+
 ;; Unbind transpose-chars, accidental presses causes problems!!!
 (global-unset-key (kbd "C-t"))
 
