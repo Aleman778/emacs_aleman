@@ -55,6 +55,9 @@
 ;; Disable toolbar
 (tool-bar-mode -1)
 
+;; Disable scroll bars
+(scroll-bar-mode -1)
+
 ;; Flash the screen instead of using sound.
 (setq visible-bell t)
 
@@ -99,6 +102,14 @@
 	'minibuffer-complete-word)
       (define-key minibuffer-local-must-match-filename-map " "
 	'minibuffer-complete-word)))
+
+;; Enable ansi-colors in compilation buffer.
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; Disable C-x l key bindings
 (defun am-text-hook () 
