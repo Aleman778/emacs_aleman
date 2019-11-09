@@ -6,6 +6,7 @@
 (require 'am-theme)
 (require 'cpp-compile)
 (require 'rust-compile)
+(require 'nodejs-compile)
 
 ;; Goto specific line (Alt-g)
 (global-set-key (kbd "M-g") 'goto-line)
@@ -113,6 +114,13 @@
 
             ;; Run test cases for current project (Ctrl-c v)
             (local-set-key (kbd "C-c v") 'rust-test)))
+
+
+;; Javascript specific key bindings
+(add-hook 'javascript-mode-hook
+          (lambda ()
+            ;; Start the Node JS server 
+            (local-set-key (kbd "M-C-p") 'nodejs-start-server)))
 
 
 (provide 'am-bindings)
