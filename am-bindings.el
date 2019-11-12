@@ -2,6 +2,7 @@
 
 ;; Require functions that are suppose to be bound to keys
 (require 'am-basic)
+(require 'am-delete)
 (require 'am-comment)
 (require 'am-theme)
 (require 'cpp-compile)
@@ -15,7 +16,7 @@
 (global-set-key (kbd "M-n") 'next-error)
 
 ;; Find previous error (Alt-Ctrl-n)
-(global-set-key (kbd "M-C-n") 'previous-error)
+(delete-set-key (kbd "M-C-n") 'previous-error)
 
 ;; Open compilation buffer (Ctrl-c 8)
 (global-set-key (kbd "C-c 8") 'am-open-compilation-buffer)
@@ -56,6 +57,19 @@
 
 ;; Unbind transpose-chars, accidental presses causes problems!!!
 (global-unset-key (kbd "C-t"))
+
+;; Custom delete line backwards (Ctrl-Shift-k)
+(global-set-key (kbd "C-S-k") 'my-delete-line-backward)
+
+;; Custom delete line (Ctrl-k)
+(global-set-key (kbd "C-k") 'my-delete-line)
+
+;; Custom delete word (Alt-d)
+(global-set-key (kbd "M-d") 'my-delete-word)
+
+;; Custom backwards delete word (Alt/Ctrl-backspace
+(global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
+(global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
 
 
 ;; Bind major-mode specific elisp functions to local key commands
