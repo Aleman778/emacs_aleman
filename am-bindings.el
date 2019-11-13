@@ -16,7 +16,7 @@
 (global-set-key (kbd "M-n") 'next-error)
 
 ;; Find previous error (Alt-Ctrl-n)
-(delete-set-key (kbd "M-C-n") 'previous-error)
+(global-set-key (kbd "M-C-n") 'previous-error)
 
 ;; Open compilation buffer (Ctrl-c 8)
 (global-set-key (kbd "C-c 8") 'am-open-compilation-buffer)
