@@ -8,6 +8,7 @@
 (require 'cpp-compile)
 (require 'rust-compile)
 (require 'nodejs-compile)
+(require 'python-compile)
 
 ;; Goto specific line (Alt-g)
 (global-set-key (kbd "M-g") 'goto-line)
@@ -135,6 +136,13 @@
           (lambda ()
             ;; Start the Node JS server 
             (local-set-key (kbd "M-C-p") 'nodejs-start-server)))
+
+
+;; Python specific key bindings
+(add-hook 'python-mode-hook
+          (lambda ()
+            ;; Execute the current python script (Alt-Ctrl-p)
+            (local-set-key (kbd "M-C-p") 'python-execute-current)))
 
 
 (provide 'am-bindings)
