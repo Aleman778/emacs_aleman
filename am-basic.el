@@ -46,8 +46,8 @@
 ;; Disable the startup screen
 (setq inhibit-startup-screen t)
 
-;; Enable menu bar
-(menu-bar-mode 1)
+;; Disable menu bar
+(menu-bar-mode -1)
 
 ;; Disable desktop save mode
 (desktop-save-mode -1)
@@ -94,6 +94,9 @@
 
 ;; Add .sq files to rust-mode (temporary)
 (add-to-list 'auto-mode-alist '("\\.sq\\'" . rust-mode))
+
+;; Add .ejs files to html-mode
+(add-to-list 'auto-mode-alist '("\\.ejs\\'" . html-mode))
 
 ;; Set background color to reduce blue light
 (set-background-color "floral white")
