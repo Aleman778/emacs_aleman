@@ -127,4 +127,21 @@
   (interactive) 
   (other-window -1))
 
+
+;; Enable multi-web-mode for embedded javascript/ php in html-mode
+(require 'multi-web-mode)
+(setq mweb-default-major-mode 'html-mode)
+(setq mweb-tags 
+      '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
+        (js-mode  "<script[^>]*>" "</script>")
+        (js-mode  "<%[-_=#%]?" "[-_]?%>")
+        (css-mode "<style[^>]*>" "</style>")))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
+(multi-web-global-mode 1)
+
+
+;; Enable smooth scrolling
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
+
 (provide 'am-basic)
