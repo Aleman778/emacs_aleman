@@ -37,10 +37,10 @@
   (interactive)
   (let ((project (rust-find-cargo-folder (rust-current-file)))
         (example (rust-find-examples-folder (rust-current-file))))
-    (if (eq project nil) (if (eq example nil) (rust-run-file (rust-current-file))
-                           (rust-cargo-example example (file-name-sans-extension (file-name-nondirectory (rust-current-file)))))
-      (progn (setq rust-cargo-project project)
-             (rust-cargo-build-and-run)))))
+    (if (not (eq example nil)) (rust-cargo-example example (file-name-sans-extension
+                                                            (file-name-nondirectory (rust-current-file))))
+      (if (eq project nil) (error "Could not find cargo project or an example folder.")
+        (progn (setq rust-cargo-project project) (rust-cargo-build-and-run))))))
 
 
 (defun rust-run-current-file ()
@@ -103,15 +103,14 @@
 (defun rust-cargo-test (project)
   "Run test cases in the rust project, using the cargo build system"
   (let ((default-directory project))
-    (async-shell-command (concat rust-cargo-command " test")
+    (async-shell-command (concat rust-cargo-command " test -- --nocapture")
                          (get-buffer "*compilation*") (get-buffer "*compilation*"))))
 
 
 (defun rust-cargo-example (project example)
   "Run specific example in the rust project, using the cargo build system"
   (let ((default-directory project))
-    (async-shell-command (concat rust-cargo-command " run --example " example)
-                         (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+    (compile (concat rust-cargo-command " run --example " example))))
 
   
 

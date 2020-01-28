@@ -22,6 +22,9 @@
 ;; Open compilation buffer (Ctrl-c 8)
 (global-set-key (kbd "C-c 8") 'am-open-compilation-buffer)
 
+;; Goto line
+(global-set-key (kbd "C-M-'") 'goto-line)
+
 ;; Move between buffers (Ctrl-./,)
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-,") 'am-back-window)
@@ -72,6 +75,8 @@
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
 
+;; Unbind kill-emacs, accidental key presses kills emacs!!!
+(global-unset-key (kbd "C-x C-c"))
 
 ;; Bind major-mode specific elisp functions to local key commands
 
