@@ -46,22 +46,22 @@
 ;; Disable the startup screen
 (setq inhibit-startup-screen t)
 
-;; Disable menu bar
+;; Disable menu bar.
 (menu-bar-mode -1)
 
-;; Disable desktop save mode
+;; Disable desktop save mode.
 (desktop-save-mode -1)
 
-;; Disable toolbar
+;; Disable toolbar.
 (tool-bar-mode -1)
 
-;; Disable scroll bars
+;; Disable scroll bars.
 (scroll-bar-mode -1)
 
 ;; Flash the screen instead of using sound.
 (setq visible-bell t)
 
-;; Disable user from reading compilation command
+;; Disable user from reading compilation command.
 (setq compilation-read-command nil)
 
 ;; Always scroll the the bottom of compilation buffer.
@@ -69,6 +69,9 @@
 
 ;; Disable Ctrl-x l command.
 (setq count-lines-page nil)
+
+;; Insert new lines useing C-n if end of file.
+(setq next-line-add-newlines t)
 
 ;; Reuse buffer frames when using display buffers
 (add-to-list 'display-buffer-alist
@@ -143,5 +146,8 @@
 ;; Enable smooth scrolling
 (require 'smooth-scrolling)
 (smooth-scrolling-mode 1)
+
+;; Disable auto line breaks
+(auto-fill-mode nil)
 
 (provide 'am-basic)

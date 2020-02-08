@@ -5,6 +5,7 @@
 (require 'am-delete)
 (require 'am-comment)
 (require 'am-theme)
+(require 'idomenu)
 (require 'cpp-compile)
 (require 'rust-compile)
 (require 'nodejs-compile)
@@ -75,6 +76,9 @@
 (global-set-key (kbd "<M-backspace>") 'my-backward-delete-word)
 (global-set-key (kbd "<C-backspace>") 'my-backward-delete-word)
 
+;; Custom ido goto symbol (Alt-i)
+(global-set-key (kbd "M-i") 'ido-goto-symbol)
+
 ;; Unbind kill-emacs, accidental key presses kills emacs!!!
 (global-unset-key (kbd "C-x C-c"))
 
@@ -128,9 +132,6 @@
             
             ;; Run current project a file (Alt-Ctrl-p)
             (local-set-key (kbd "M-C-p") 'rust-run)
-
-            ;; Compile current file (Alt-p)
-            (local-set-key (kbd "M-p") 'rust-run-current-file)
 
             ;; Run test cases for current project (Ctrl-c v)
             (local-set-key (kbd "C-c v") 'rust-test)))
