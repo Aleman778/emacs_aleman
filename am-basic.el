@@ -71,7 +71,7 @@
 (setq count-lines-page nil)
 
 ;; Insert new lines useing C-n if end of file.
-(setq next-line-add-newlines t)
+(setq next-line-add-newlines nil)
 
 ;; Reuse buffer frames when using display buffers
 (add-to-list 'display-buffer-alist
