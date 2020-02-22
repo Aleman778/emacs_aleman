@@ -50,7 +50,9 @@
   (define-key xah-fly-key-map (kbd "p") 'forward-word)
   (define-key xah-fly-key-map (kbd "j") 'xah-beginning-of-line-or-block)
   (define-key xah-fly-key-map (kbd "'") 'xah-end-of-line-or-block)
-  (define-key xah-fly-key-map (kbd "[") 'xah-insert-space-before)) 
+  (define-key xah-fly-key-map (kbd "[") 'xah-insert-space-before)
+  (define-key xah-fly-key-map (kbd "SPC <left>") 'previous-buffer)
+  (define-key xah-fly-key-map (kbd "SPC <right>") 'next-buffer))
 
 
 (add-hook 'xah-fly-command-mode-activate-hook 'my-xah-command-mode-keys)
