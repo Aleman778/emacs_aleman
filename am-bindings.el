@@ -10,6 +10,7 @@
 (require 'rust-compile)
 (require 'nodejs-compile)
 (require 'python-compile)
+(require 'latex-compile)
 
 ;; Goto specific line (Alt-g)
 (global-set-key (kbd "M-g") 'goto-line)
@@ -149,6 +150,12 @@
           (lambda ()
             ;; Execute the current python script (Alt-Ctrl-p)
             (local-set-key (kbd "M-C-p") 'python-execute-current)))
+
+
+(add-hook 'latex-mode-hook
+          (lambda ()
+            ;; Compile the tex file and open it
+            (local-set-key (kbd "M-C-p") 'compile-latex-pdf)))
 
 
 (provide 'am-bindings)

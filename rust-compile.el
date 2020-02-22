@@ -97,7 +97,7 @@
   "Checks the rust project, using the cargo build system"
   (let ((default-directory project))
     (async-shell-command (concat rust-cargo-command " check")
-                         (get-buffer "*compilation*") (get-buffer "*compilation*"))))
+                        (get-buffer "*compilation*") (get-buffer "*compilation*"))))
 
 
 (defun rust-cargo-test (project)
