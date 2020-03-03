@@ -142,11 +142,6 @@
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
 (multi-web-global-mode 1)
 
-
-;; Enable smooth scrolling
-(require 'smooth-scrolling)
-(smooth-scrolling-mode 1)
-
 ;; Disable auto line breaks
 (auto-fill-mode nil)
 

@@ -41,7 +41,7 @@
   ;; Make escape key do Ctrl-g (quit)
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
 
-
+  ;; Navigation keys (shifted right by one)
   (define-key xah-fly-key-map (kbd "k") 'backward-char)
   (define-key xah-fly-key-map (kbd "i") 'backward-word)
   (define-key xah-fly-key-map (kbd "l") 'next-line)
@@ -50,9 +50,17 @@
   (define-key xah-fly-key-map (kbd "p") 'forward-word)
   (define-key xah-fly-key-map (kbd "j") 'xah-beginning-of-line-or-block)
   (define-key xah-fly-key-map (kbd "'") 'xah-end-of-line-or-block)
+
+  ;; Moved insert space (shifted right by one)
   (define-key xah-fly-key-map (kbd "[") 'xah-insert-space-before)
+
+  ;; Next/ previous buffer
   (define-key xah-fly-key-map (kbd "SPC <left>") 'previous-buffer)
-  (define-key xah-fly-key-map (kbd "SPC <right>") 'next-buffer))
+  (define-key xah-fly-key-map (kbd "SPC <right>") 'next-buffer)
+  (define-key xah-fly-key-map (kbd "u") 'recenter-top-bottom)
+
+  ;; Translate compile command to SPC p
+  (define-key key-translation-map (kbd "SPC p") (kbd "M-C-p")))
 
 
 (add-hook 'xah-fly-command-mode-activate-hook 'my-xah-command-mode-keys)

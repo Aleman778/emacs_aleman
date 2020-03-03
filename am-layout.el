@@ -28,6 +28,7 @@
   (find-file file3)
   (split-window-below)
   (if (eq (get-buffer "*compilation*") nil) (get-buffer-create "*compilation*") nil)
+  (balance-windows)
   (enlarge-window (/ (window-height (next-window)) 2))
   (other-window 1)
   (switch-to-buffer "*compilation*")
