@@ -94,29 +94,18 @@
 ;; C++ specific key bindings
 (add-hook 'c++-mode-hook
           (lambda ()
-            ;; Custom compile (Alt-i)
-            (local-set-key (kbd "M-i") 'cpp-custom-compile)
 
-            ;; Build code in release mode (Alt-Ctrl-r)
-            (local-set-key (kbd "M-C-r") 'cpp-build-release)
-
-            ;; Build code in debug mode (Alt-Ctrl-d)
-            (local-set-key (kbd "M-C-d") 'cpp-build-debug)
+            ;; Build and run project (Alt-Ctrl-p)
+            (local-set-key (kbd "M-C-p") 'cpp-build-and-run-default)
 
             ;; Kill the currently running program (Ctrl-c Ctrl-m)
-            (local-set-key (kbd "C-c C-m") 'cpp-kill-program)
+            (local-set-key (kbd "C-c C-m") 'kill-compilation)
 
-            ;; Compile and run the program (Alt-Ctrl-u)
-            (local-set-key (kbd "M-C-u") 'cpp-compile-and-run)
+            ;; Generate project files (Alt-Ctrl-u)
+            (local-set-key (kbd "M-C-u") 'cpp-generate-project)
 
-            ;; Run the program in release mode (Alt-p)
-            (local-set-key (kbd "M-p") 'cpp-run-program-release)
-
-            ;; Run the program in debug mode (Alt-Ctrl-p)
-            (local-set-key (kbd "M-C-p") 'cpp-run-program-debug)
-
-            ;; Generate project files (Ctrl-c Ctrl-g)
-            (local-set-key (kbd "C-c C-g") 'cpp-generate-project)))
+            ;; Run the specific file (Alt-p)
+            (local-set-key (kbd "M-p") 'cpp-compile-and-run-default)))
 
 
 ;; Rust specific key bindings
