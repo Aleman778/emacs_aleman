@@ -141,10 +141,21 @@
             (local-set-key (kbd "M-C-p") 'python-execute-current)))
 
 
+;; LaTeX specific key bindings
 (add-hook 'latex-mode-hook
           (lambda ()
             ;; Compile the tex file and open it
             (local-set-key (kbd "M-C-p") 'compile-latex-pdf)))
+
+
+;; Haskell specific key bindings
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            ;; Compile the haskell program
+            (local-set-key (kbd "M-C-p") 'haskell-compile)
+
+            ;; Haskell please stop doing this to me!!!
+            (setq electric-indent-mode nil)))
 
 
 (provide 'am-bindings)

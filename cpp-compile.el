@@ -6,7 +6,7 @@
 (setq cpp-compiler-bin "g++") ; The compiler to use.
 (setq cpp-build-bin "make") ; The build binary.
 (setq cpp-build-file "Makefile") ; The build file, directory search is used to find this file.
-(setq cpp-build-output-bin "bin\\debug-windows-x86_64\\") ; The output from building project.
+(setq cpp-build-output-bin "bin\\debug\\") ; The output from building project.
 (setq cpp-run-default-file "sqrrlc.exe") ; The default filename for built executable.
 (setq cpp-build-directory "") ; This is automatically updated each build.
 (setq cpp-generate-project-bin "generate_project.bat gmake") ; Generate build files binary e.g. Makefiles.
