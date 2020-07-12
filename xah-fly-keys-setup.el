@@ -26,6 +26,10 @@
   (define-key xah-fly-key-map (kbd "SPC i d") 'electric-buffer-list)
 
 
+  ;; Kill current buffer (command mode: SPACE k j)
+  (define-key xah-fly-key-map (kbd "SPC k j") 'kill-current-buffer)
+
+
   ;; Electric buffer mode (command mode: SPACE i d)
   (define-key xah-fly-key-map (kbd "SPC o t") 'kmacro-end-and-call-macro)
 
@@ -40,6 +44,23 @@
 
   ;; Make escape key do Ctrl-g (quit)
   (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+
+
+  ;; Copy rectangle as kill (command mode: SPACE o c)
+  (define-key xah-fly-key-map (kbd "SPC o c") 'copy-rectangle-as-kill)
+
+
+  ;; Yank rectangle (command mode: SPACE o v)
+  (define-key xah-fly-key-map (kbd "SPC o v") 'yank-rectangle)
+
+
+  ;; Kill rectangle (command mode: SPACE o x)
+  (define-key xah-fly-key-map (kbd "SPC o x") 'kill-rectangle)
+
+
+  ;; Ido goto a specific symbol (command mode: SPACE i w)
+  (define-key xah-fly-key-map (kbd "SPC i w") 'ido-goto-symbol)
+
 
   ;; Navigation keys (shifted right by one)
   (define-key xah-fly-key-map (kbd "k") 'backward-char)
@@ -61,6 +82,7 @@
 
   ;; Translate compile command to SPC p
   (define-key key-translation-map (kbd "SPC p") (kbd "M-C-p")))
+
 
 
 (add-hook 'xah-fly-command-mode-activate-hook 'my-xah-command-mode-keys)

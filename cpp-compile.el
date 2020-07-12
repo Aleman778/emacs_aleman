@@ -44,6 +44,7 @@
 
 (defun cpp-build-project (option)
   (interactive)
+  (print (locate-dominating-file (current-buffer-file) cpp-build-file))
   (let* ((file (current-buffer-file))
          (buildfile (locate-dominating-file file cpp-build-file))
          (builddir (file-name-directory buildfile))
