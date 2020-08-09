@@ -16,32 +16,27 @@
 (setq next-line-add-newlines nil)	;; Insert new lines useing C-n if end of file.
 (setq backup-directory-alist `((".*" . "~/.saves/"))) ;; Set the backup directory
 
-
 ;; Basic filepaths
-(setq am-config-file "~/.emacs.d/config.el")
-(setq am-config-file "~/.emacs.d/config.el")
+(setq am-config-file   "~/.emacs.d/config.el")
+(setq am-packages-file "~/.emacs.d/packages.el")
 
-
-;; Setup the straight.el package manager
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
+;; Setup package manager
+(require 'am-package)
 
 ;; Setup keybinds
 (require 'am-keybinds)
 
-;; Setup straight packages
-(load "~/.emacs.d/packages.el")
+;; Setup basic functions
+(require 'am-functions)
+
+;; Create files if they don't exists
+(if (file-exists-p am-config-file) nil
+  (write-region (am-elisp-template "config.el" "your own custom tinkering can be done here") nil am-config-file))
+(if (file-exists-p am-packages-file) nil
+  (write-region (am-elisp-template "packages.el" "define packages to use") nil am-packages-file))
+
+;; Load custom packages
+(load am-packages-file)
 
 ;; Reuse buffer frames when using display buffers
 (add-to-list 'display-buffer-alist
@@ -74,26 +69,11 @@
 
 ;; Initializes the packages and onfigs
 (defun am-initialize ()
-  ;; Evil-mode config 
-  (when (require 'evil nil 'noerror)
-    ;; enables the evil mode
-    (evil-mode 1)
+  ;; Setup each package installed
 
-    ;; use space as leader key
-    (evil-set-leader nil (kbd "<SPC>")))
-
-  ;; Company-mode config
-  (when (require 'company nil 'noerror)
-    ;; Enable company mode globally 
-    (add-hook 'after-init-hook 'global-company-mode))
-
-  ;; Ido-mode config
-  (when (require 'ido nil 'noerror)
-    ;; Enable ido mode
-    (ido-mode 1)
-
-    ;; Disable ido mode from merging files from other directories
-    (setq ido-auto-merge-work-directories-length -1))
+  ;; Setup keybindings
+  (cond ((eq am-keybinds evil) (evil-mode 1))
+	((eq am-keybinds evil) (load "modules/xah-fly-keys/config.el")))
 
   ;; Allow for final customizations before finishing up
   (load "~/.emacs.d/config.el"))
