@@ -16,7 +16,8 @@ Now in your `~/.emacs` file put the following code:
 (am-initialize)
 ```
 Before restarting emacs please take a look inside the `packages.el` file and turn on and off
-packages that you wish to use.
+packages that you wish to use. Note that the first time you start Emacs it will take a few minutes
+but the next time it will go very fast!
 And that's it just start emacs and happy hacking!
 
 ## Custom configurations
