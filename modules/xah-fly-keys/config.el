@@ -39,5 +39,5 @@
   (define-key xah-fly-key-map (kbd "SPC <right>") 'next-buffer)
   (define-key xah-fly-key-map (kbd "u") 'recenter-top-bottom)
   (define-key key-translation-map (kbd "SPC p") (kbd "M-C-p")))
-(add-hook 'xah-fly-command-mode-activate-hook 'my-xah-command-mode-keys)
+(add-hook 'xah-fly-command-mode-activate-hook 'am-xah-command-mode-keys)
 (am-xah-command-mode-keys)
