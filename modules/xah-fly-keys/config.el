@@ -1,3 +1,6 @@
+;; Load xah-fly-keys
+(require 'xah-fly-keys)
+
 ;; Set the layout to QWERTY
 (xah-fly-keys-set-layout "qwerty")
 

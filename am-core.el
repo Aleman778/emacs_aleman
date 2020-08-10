@@ -17,11 +17,13 @@
 (setq backup-directory-alist `((".*" . "~/.saves/"))) ;; Set the backup directory
 
 ;; Basic filepaths
-(setq am-config-file   "~/.emacs.d/config.el")
-(setq am-packages-file "~/.emacs.d/packages.el")
+(defconst am-dir (file-name-directory load-file-name))
+(defconst am-init-file   "~/.emacs.d/init.el")
+(defconst am-config-file "~/.emacs.d/config.el")
 
-;; Setup package manager
-(require 'am-package)
+
+;; Setup module system
+(require 'am-modules)
 
 ;; Setup keybinds
 (require 'am-keybinds)
@@ -30,13 +32,13 @@
 (require 'am-functions)
 
 ;; Create files if they don't exists
+(if (file-exists-p am-init-file) nil
+  (write-region (am-elisp-template "init.el" "define modules to use") nil am-init-file))
 (if (file-exists-p am-config-file) nil
   (write-region (am-elisp-template "config.el" "your own custom tinkering can be done here") nil am-config-file))
-(if (file-exists-p am-packages-file) nil
-  (write-region (am-elisp-template "packages.el" "define packages to use") nil am-packages-file))
 
 ;; Load custom packages
-(load am-packages-file)
+(load am-init-file)
 
 ;; Reuse buffer frames when using display buffers
 (add-to-list 'display-buffer-alist
@@ -69,14 +71,11 @@
 
 ;; Initializes the packages and onfigs
 (defun am-initialize ()
-  ;; Setup each package installed
-
-  ;; Setup keybindings
-  (cond ((eq am-keybinds evil) (evil-mode 1))
-	((eq am-keybinds evil) (load "modules/xah-fly-keys/config.el")))
-
+  ;; Setup each module installed
+  (am-enable-modules)
+  
   ;; Allow for final customizations before finishing up
-  (load "~/.emacs.d/config.el"))
+  (load am-config-file))
 
 
 (provide 'am-core)
