@@ -1,5 +1,8 @@
 ;;; am-keybinds --- defines keybinds for convenience -*- lexical-binding: t; -*- 
 
+;; Compile C++ code helper
+(require 'cpp-compile)
+
 ;; Goto specific line (Alt-g)
 (global-set-key (kbd "M-g") 'goto-line)
 
@@ -70,5 +73,21 @@
 
 ;; Unbind kill-emacs, accidental key presses kills emacs!!!
 (global-unset-key (kbd "C-x C-c"))
+
+;; C++ specific key bindings
+(add-hook 'c++-mode-hook
+          (lambda ()
+
+            ;; Build and run project (Alt-Ctrl-p)
+            (local-set-key (kbd "M-C-p") 'cpp-build-and-run-default)
+
+            ;; Kill the currently running program (Ctrl-c Ctrl-m)
+            (local-set-key (kbd "C-c C-m") 'kill-compilation)
+
+            ;; Generate project files (Alt-Ctrl-u)
+            (local-set-key (kbd "M-C-u") 'cpp-generate-project)
+
+            ;; Run the specific file (Alt-p)
+            (local-set-key (kbd "M-p") 'cpp-compile-and-run-default)))
 
 (provide 'am-keybinds)

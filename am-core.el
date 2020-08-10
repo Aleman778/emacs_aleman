@@ -66,6 +66,9 @@
 ;; Disable auto line breaks
 (auto-fill-mode nil)
 
+;; Show matching parenthesis
+(show-paren-mode 1)
+
 ;; Org mode disable validation link
 (setq org-export-html-validation-link nil)
 

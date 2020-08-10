@@ -26,7 +26,7 @@
   (define-key xah-fly-key-map (kbd "SPC o c") 'copy-rectangle-as-kill)
   (define-key xah-fly-key-map (kbd "SPC o v") 'yank-rectangle)
   (define-key xah-fly-key-map (kbd "SPC o x") 'kill-rectangle)
-  (define-key xah-fly-key-map (kbd "SPC i w") 'ido-goto-symbol)
+  (define-key xah-fly-key-map (kbd "SPC e f") 'rg)
   (define-key xah-fly-key-map (kbd "k") 'backward-char)
   (define-key xah-fly-key-map (kbd "i") 'backward-word)
   (define-key xah-fly-key-map (kbd "l") 'next-line)
