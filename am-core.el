@@ -37,6 +37,43 @@
 (if (file-exists-p am-config-file) nil
   (write-region (am-elisp-template "config.el" "your own custom tinkering can be done here") nil am-config-file))
 
+;; Check if pos is inside C++ enum class, TODO: this should be moved somewhere else.
+(defun inside-class-enum-p (pos)
+  "Checks if POS is within the braces of a C++ enum class"
+  (ignore-errors
+    (save-excursion
+      (looking-back "enum[ \t]+class[ \t]+[^}]+"))))
+
+;; Check if pos is inside C++ class
+(defun inside-class-p (pos)
+  "Checks if POS is within the braces of a C++ class"
+  (ignore-errors
+    (save-excursion
+      (looking-back "class[ \t]+[^}]+"))))
+
+;; C++ linup under anchor used for fixing indentation problems
+(defun am-c-lineup-under-anchor (langlem)
+  (if (inside-class-enum-p (c-langelem-pos langelem))
+      'c-lineup-under-anchor
+    (if (inside-class-p (c-langelem-pos langlem)) '+ 0)))
+
+;; Setup indentation style C++
+(c-add-style "microsoft"
+             '("stroustrup"
+               (c-offsets-alist
+                (innamespace . +)
+                (inline-open . 0)
+                (access-label . -)
+                (inclass . +)
+                (inher-cont . c-lineup-multi-inher)
+                (arglist-cont-nonempty . +)
+                (brace-list-open . +)
+                (brace-list-entry . am-c-lineup-under-anchor)
+                (template-args-cont . +)
+                (comment-intro . 0)
+                (member-init-intro . +))))
+(setq c-default-style "microsoft")
+
 ;; Load custom packages
 (load am-init-file)
 
