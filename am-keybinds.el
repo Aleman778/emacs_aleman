@@ -1,16 +1,7 @@
-;; Bind interactive elisp functios to keys commands.
+;;; am-keybinds --- defines keybinds for convenience -*- lexical-binding: t; -*- 
 
-;; Require functions that are suppose to be bound to keys
-(require 'am-basic)
-(require 'am-delete)
-(require 'am-comment)
-(require 'am-theme)
-(require 'idomenu)
+;; Compile C++ code helper
 (require 'cpp-compile)
-(require 'rust-compile)
-(require 'nodejs-compile)
-(require 'python-compile)
-(require 'latex-compile)
 
 ;; Goto specific line (Alt-g)
 (global-set-key (kbd "M-g") 'goto-line)
@@ -83,14 +74,6 @@
 ;; Unbind kill-emacs, accidental key presses kills emacs!!!
 (global-unset-key (kbd "C-x C-c"))
 
-;; Bind major-mode specific elisp functions to local key commands
-
-;; Elisp specific key bindings
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (local-set-key (kbd "M-e") 'eval-buffer)))
-
-           
 ;; C++ specific key bindings
 (add-hook 'c++-mode-hook
           (lambda ()
@@ -107,56 +90,4 @@
             ;; Run the specific file (Alt-p)
             (local-set-key (kbd "M-p") 'cpp-compile-and-run-default)))
 
-
-;; Rust specific key bindings
-(add-hook 'rust-mode-hook
-          (lambda ()
-            ;; Build/compile and run current project or file (Alt-Ctrl-u)
-            (local-set-key (kbd "M-C-u") 'rust-compile-and-run)
-
-            ;; Compile and run the current file (Ctrl-c c)
-            (local-set-key (kbd "C-c c") 'rust-compile-and-run-file)
-            
-            ;; Build and run the current project (Ctrl-c b)
-            (local-set-key (kbd "C-c b") 'rust-cargo-build-and-run)
-            
-            ;; Run current project a file (Alt-Ctrl-p)
-            (local-set-key (kbd "M-C-p") 'rust-run)
-
-            ;; Run test cases for current project (Ctrl-c v)
-            (local-set-key (kbd "C-c v") 'rust-test)))
-
-
-;; Javascript specific key bindings
-(add-hook 'javascript-mode-hook
-          (lambda ()
-            ;; Start the Node JS server 
-            (local-set-key (kbd "M-C-p") 'nodejs-start-server)))
-
-
-;; Python specific key bindings
-(add-hook 'python-mode-hook
-          (lambda ()
-            ;; Execute the current python script (Alt-Ctrl-p)
-            (local-set-key (kbd "M-C-p") 'python-execute-current)))
-
-
-;; LaTeX specific key bindings
-(add-hook 'latex-mode-hook
-          (lambda ()
-            ;; Compile the tex file and open it
-            (local-set-key (kbd "M-C-p") 'compile-latex-pdf)))
-
-
-;; Haskell specific key bindings
-(add-hook 'haskell-mode-hook
-          (lambda ()
-            ;; Compile the haskell program
-            (local-set-key (kbd "M-C-p") 'haskell-compile)
-
-            ;; Haskell please stop doing this to me!!!
-            (setq electric-indent-mode nil)))
-
-
-(provide 'am-bindings)
-
+(provide 'am-keybinds)
