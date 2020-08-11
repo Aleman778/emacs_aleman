@@ -104,7 +104,7 @@
 
 ;;; Change theme functions
 
-
+(setq am-background-alist (list "floral white"))
 (setq am-theme-alist (list 'default))
 (setq *cur-theme* 'default)
 (setq *cur-theme-idx* -1)
@@ -114,13 +114,14 @@
   "Disable theme before loading new one."
   (mapc #'disable-theme custom-enabled-themes))
 
+
 ;; Load the next theme
 (defun am-next-theme (theme)
-  (if (eq theme 'default)
-      (progn (disable-theme *cur-theme*)
-             (set-background-color "floral white"))
-    (progn
-      (load-theme theme t)))
+  (if (eq theme 'default) (disable-theme *cur-theme*)
+    (load-theme theme t))
+  (if (< *cur-theme-idx* (length am-background-alist))
+      (let ((background (nth *cur-theme-idx* am-background-alist)))
+	(if background (set-background-color background) nil)) nil)
   (message (concat "Loading theme: " (number-to-string *cur-theme-idx*) " (" (symbol-name theme) ")"))
   (setq *cur-theme* theme))
 
@@ -133,6 +134,7 @@
 
 
 ;;; Other utilities for compilation
+
 
 (defun am-current-buffer-file ()
   "Returns the file name of the current buffer"
