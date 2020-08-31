@@ -25,34 +25,37 @@
 (defvar am-completion nil)
 
 ;; Ignore configure these packages
-(defconst am-ignore-modules-alist `(rg))
+(defconst am-ignore-modules-alist `(rg emojify))
+(defconst am-ignore-use-modules-alist `(c++-mode))
 
 
 (defun am-module-put (category module)
   (add-to-list 'am-modules-alist (intern (symbol-name module)))
-  (straight-use-package module))
+  (if (member module am-ignore-use-modules-alist) nil (straight-use-package module)))
+
 
 ;; Select packages to use 
 (defun am-load-modules (rest)
   (let ((category :utils))
     (while rest
       (let ((module (pop rest)))
-	    (cond ((keywordp module) 
-		   (setq category module))
-		  ((pcase category
-		    (:keybinds 
-		     (if am-keybinds (error "Please only select one keybinding module")
-		       (progn 
-			 (setq am-keybinds module)
-			 (am-module-put category module))))
-		     (:search 
-		      (if am-search-engine (error "Please only select one search engine module")
-			(progn 
-			  (setq am-search-engine module)
-			  (am-module-put category module))))
-		     (:utils (am-module-put category module))
-		     (:themes (straight-use-package module)))))))))
-	     
+        (cond ((keywordp module) 
+               (setq category module))
+              ((pcase category
+                 (:keybinds 
+                  (if am-keybinds (error "Please only select one keybinding module")
+                    (progn 
+                      (setq am-keybinds module)
+                      (am-module-put category module))))
+                 (:search 
+                  (if am-search-engine (error "Please only select one search engine module")
+                    (progn 
+                      (setq am-search-engine module)
+                      (am-module-put category module))))
+                 (:utils  (am-module-put category module))
+                 (:lang   (am-module-put category module))
+                 (:themes (straight-use-package module)))))))))
+
 
 (defmacro am-modules! (&rest rest)
   (am-load-modules rest))
