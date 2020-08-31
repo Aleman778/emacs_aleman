@@ -14,19 +14,7 @@
 (defun am-build-command (args)
   (let* ((command ""))
     (while args
-      (let ((arg (pop args)))
-        (cond ((stringp arg)
-               (setq command (concat command arg " ")))
-              ((symbolp arg)
-               (setq command (concat command (symbol-value arg) " ")))
-              ((functionp arg)
-               (setq command (concat command (funcall arg) " ")))
-              ((keywordp arg)
-               (pcase arg
-                 (:path  (setq command (concat command (am-buffer-path) " ")))
-                 (:file  (setq command (concat command (am-buffer-file-name) " ")))
-                 (:dir   (setq command (concat command (am-buffer-directory) " ")))
-                 (:after (setq compilation-exit-callback (pop args))))))))
+      (setq command (concat command (pop args) " ")))
     command))
 
 (defun am-run-command (dir command)
