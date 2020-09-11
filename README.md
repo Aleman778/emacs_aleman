@@ -1,4 +1,4 @@
-# am-emacs-config
+# My Emacs Configurations
 These are my emacs lisp configuration files, please feel free to use them.
 At the moment I have only configured my emacs for C++ programming.
 More major-modes will be added later when I require them my self.
@@ -20,7 +20,7 @@ packages that you wish to use. Note that the first time you start Emacs it will 
 but the next time it will go very fast!
 And that's it just start emacs and happy hacking!
 
-## Custom configurations
+## Custom Configurations
 Inside the `config.el` file you can tinker and further customize. This file is loaded
 at the end of `am-initialize` function. Here is what my config looks like:
 ```elisp
