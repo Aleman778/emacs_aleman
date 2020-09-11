@@ -2,7 +2,7 @@
 
 (defun compile-latex-pdf ()
   (interactive)
-    (am-run-in (am-buffer-directory) "compile-latex-pdf" "pdflatex" "-halt-on-error" "-output-directory=out" 
+    (am-run-in (am-buffer-directory) "pdflatex" "-halt-on-error" "-output-directory=out" 
                "-aux-directory=temp" (am-buffer-file-name)))
 
 

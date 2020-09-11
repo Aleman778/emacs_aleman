@@ -5,7 +5,7 @@
 
 (defun python-run-buffer-file ()
   (interactive)
-  (am-run "python-run-buffer-file" "python" (am-buffer-file-name)))
+  (am-run "python" (am-buffer-file-name)))
 
 
 ;; Go specific key binds

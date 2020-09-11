@@ -24,12 +24,12 @@
 
 (defun cpp-compile-buffer-file ()
   (interactive)
-  (am-run "cpp-compile-buffer-file" cpp-compiler (am-buffer-file-name) "-o" (cpp-get-exe (am-buffer-file-name))))
+  (am-run cpp-compiler (am-buffer-file-name) "-o" (cpp-get-exe (am-buffer-file-name))))
 
 
 (defun cpp-run-buffer-file ()
   (interactive)
-  (am-shell "cpp-run-buffer-file" (cpp-get-exe (am-buffer-file-name))))
+  (am-run (cpp-get-exe (am-buffer-file-name))))
   
 
 (defun cpp-compile-run-buffer-file ()
@@ -40,22 +40,22 @@
 
 (defun cpp-generate-build-files ()
   (interactive)
-  (am-run-in (cpp-build-dir) "cpp-generate-build-files" cpp-generate-project-bin))
+  (am-run-in (cpp-build-dir) cpp-generate-project-bin))
 
 
 (defun cpp-build-project (options)
   (interactive)
-  (am-run-in (cpp-build-dir) "cpp-build-project" cpp-build-bin options))
+  (am-run-in (cpp-build-dir) cpp-build-bin options))
   
 
 (defun cpp-run-project ()
   (interactive)
-  (am-shell-in (cpp-build-dir) "cpp-run-project" (concat cpp-build-output-bin cpp-run-default-file)))
+  (am-run-in (cpp-build-dir) (concat cpp-build-output-bin cpp-run-default-file)))
   
 
 (defun cpp-build-project-default ()
   (interactive)
-  (am-run-in (cpp-build-dir) "cpp-build-project" cpp-build-bin))
+  (am-run-in (cpp-build-dir) cpp-build-bin))
 
 
 (defun cpp-build-run-default ()
