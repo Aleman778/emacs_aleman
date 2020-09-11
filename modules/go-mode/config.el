@@ -5,12 +5,12 @@
 
 (defun go-run-buffer-file ()
   (interactive)
-  (am-run! "go run" (am-buffer-file-name)))
+  (am-run "go-run-buffer-file" "go" "run" (am-buffer-file-name)))
   
 
 (defun go-build-buffer-file ()
   (interactive)
-  (am-run! "go build" (am-buffer-file-name)))
+  (am-run "go-build-buffer-file" "go" "build" (am-buffer-file-name)))
   
 
 ;; Go specific key binds

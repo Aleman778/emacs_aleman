@@ -25,8 +25,8 @@
 (defvar am-completion nil)
 
 ;; Ignore configure these packages
-(defconst am-ignore-modules-alist `(rg emojify))
-(defconst am-ignore-use-modules-alist `(c++-mode))
+(defconst am-ignore-modules-alist `(rg emojify pdf-tools))
+(defconst am-ignore-use-modules-alist `(c++-mode latex-mode python-mode))
 
 
 (defun am-module-put (category module)
