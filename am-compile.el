@@ -1,11 +1,13 @@
 ;;; am-compile.el --- helper functions for compiling code -*- lexical-binding: t; -*-
 
 
-(setq compilation-exit-callback nil)
-(defun output-message-sentinel (process msg)
-  (when (memq (process-status process) '(exit signal))
-    (if compilation-exit-callback (funcall compilation-exit-callback) nil) nil)
+(defun am-compilation-exit (status code msg) 
+  (if (and (eq status 'exit) (zerop code))
+      (if compilation-exit-callback (funcall compilation-exit-callback) nil) nil)
   (setq compilation-exit-callback nil))
+
+(setq compilation-exit-callback nil)
+(setq compilation-exit-message-function 'am-compilation-exit)
 
 
 (defun am-build-command (args)
@@ -16,12 +18,12 @@
 
 
 (defun am-run (&rest args)
-  (set-process-sentinel (compile (am-build-command args)) #'output-message-sentinel))
+  (compile (am-build-command args)))
 
 
 (defun am-run-in (dir &rest args)
   (let ((default-directory dir))
-    (set-process-sentinel (compile (am-build-command args)) #'output-message-sentinel)))
+    (compile (am-build-command args))))
 
 
 (provide 'am-compile)

@@ -10,7 +10,7 @@
 
 (defun go-build-buffer-file ()
   (interactive)
-  (am-run "go" "build" (am-buffer-file-name)))
+  (am-run "go" "build"))
   
 
 ;; Go specific key binds
