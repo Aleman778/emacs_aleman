@@ -35,6 +35,7 @@
   (define-key xah-fly-key-map (kbd "p") 'forward-word)
   (define-key xah-fly-key-map (kbd "j") 'xah-beginning-of-line-or-block)
   (define-key xah-fly-key-map (kbd "'") 'xah-end-of-line-or-block)
+  (define-key xah-fly-key-map (kbd "SPC '") nil)
   (define-key xah-fly-key-map (kbd "SPC <left>") 'previous-buffer)
   (define-key xah-fly-key-map (kbd "SPC <right>") 'next-buffer)
   (define-key xah-fly-key-map (kbd "u") 'recenter-top-bottom)

@@ -5,8 +5,8 @@
 (setq cpp-compiler "cl") ; The compiler to use.
 (setq cpp-build-bin "build.bat") ; The build binary.
 (setq cpp-build-file "build.bat") ; The build file, directory search is used to find this file.
-(setq cpp-build-output-bin "build/") ; The output from building project.
-(setq cpp-run-default-file "sqrrl.exe") ; The default filename for built executable.
+(setq cpp-build-output-bin "bin/") ; The output from building project.
+(setq cpp-run-default-file "lab.exe") ; The default filename for built executable.
 (setq cpp-build-directory "") ; This is automatically updated each build.
 (setq cpp-generate-project-bin "generate_project.bat gmake") ; Generate build files binary e.g. Makefiles.
 (setq cpp-generate-project-file "generate_project.bat") ; Searches for this specific file.
@@ -125,45 +125,15 @@
   (interactive)
   (setq compilation-exit-callback 'cpp-run-project)
   (cpp-build-project-default))
-  
-
-;; Check if pos is inside C++ enum class
-(defun inside-class-enum-p (pos)
-  "Checks if POS is within the braces of a C++ enum class"
-  (ignore-errors
-    (save-excursion
-      (looking-back "enum[ \t]+class[ \t]+[^}]+"))))
-
-;; Check if pos is inside C++ class
-(defun inside-class-p (pos)
-  "Checks if POS is within the braces of a C++ class"
-  (ignore-errors
-    (save-excursion
-      (looking-back "class[ \t]+[^}]+"))))
-
-;; C++ linup under anchor used for fixing indentation problems
-(defun am-c-lineup-under-anchor (langlem)
-  (if (inside-class-enum-p (c-langelem-pos langelem))
-      'c-lineup-under-anchor
-    (if (inside-class-p (c-langelem-pos langlem)) '+ 0)))
 
 ;; Setup indentation style C++
-(c-add-style "microsoft"
-             '("stroustrup"
+(c-add-style "mystyle"
+             '("gnu"
                (c-offsets-alist
-                (innamespace . +)
-                (inline-open . 0)
-                (access-label . -)
-                (inclass . +)
-                (inher-cont . c-lineup-multi-inher)
-                (arglist-cont-nonempty . +)
-                (brace-list-open . +)
-                (brace-list-entry . am-c-lineup-under-anchor)
-                (template-args-cont . +)
-                (comment-intro . 0)
-                (member-init-intro . +))))
-(setq c-default-style "microsoft")
+                (case-label . +))))
 
+(setq-default c-basic-offset 4)           
+(setq c-default-style "mystyle")
 
 ;; C++ specific keybinds
 (add-hook 'c++-mode-hook
