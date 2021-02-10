@@ -5,8 +5,8 @@
 (setq cpp-compiler "cl") ; The compiler to use.
 (setq cpp-build-bin "build.bat") ; The build binary.
 (setq cpp-build-file "build.bat") ; The build file, directory search is used to find this file.
-(setq cpp-build-output-bin "bin/") ; The output from building project.
-(setq cpp-run-default-file "lab.exe") ; The default filename for built executable.
+(setq cpp-build-output-bin "build/") ; The output from building project.
+(setq cpp-run-default-file "platformer.exe") ; The default filename for built executable.
 (setq cpp-build-directory "") ; This is automatically updated each build.
 (setq cpp-generate-project-bin "generate_project.bat gmake") ; Generate build files binary e.g. Makefiles.
 (setq cpp-generate-project-file "generate_project.bat") ; Searches for this specific file.

@@ -6,11 +6,14 @@
 (defun go-run-buffer-file ()
   (interactive)
   (am-run "go" "run" (am-buffer-file-name)))
-  
+
+(defun go-main-dir ()
+  (am-locate-file (am-buffer-path) "main.go"))
 
 (defun go-build-buffer-file ()
   (interactive)
-  (am-run "go" "build"))
+  (setq compilation-exit-callback (lambda () (am-run-in (go-main-dir) "debugexecutable.exe")))
+  (am-run-in (go-main-dir) "go" "build" "-o" "debugexecutable.exe"))
   
 (defun go-test-buffer-file ()
   (interactive)
