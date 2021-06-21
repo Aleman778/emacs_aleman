@@ -6,7 +6,7 @@
 (setq cpp-build-bin "build.bat") ; The build binary.
 (setq cpp-build-file "build.bat") ; The build file, directory search is used to find this file.
 (setq cpp-build-output-bin "build/") ; The output from building project.
-(setq cpp-run-default-file "platformer.exe") ; The default filename for built executable.
+(setq cpp-run-default-file "win32_platform.exe") ; The default filename for built executable.
 (setq cpp-build-directory "") ; This is automatically updated each build.
 (setq cpp-generate-project-bin "generate_project.bat gmake") ; Generate build files binary e.g. Makefiles.
 (setq cpp-generate-project-file "generate_project.bat") ; Searches for this specific file.
@@ -78,7 +78,6 @@
 (defun cpp-get-exe (file)
   (am-file-extension file cpp-executable-ext))
 
-
 (defun cpp-build-dir ()
   (am-locate-file (am-buffer-path) cpp-build-file))
 
@@ -89,32 +88,26 @@
   (interactive)
   (am-run cpp-compiler (am-buffer-file-name) "-o" (cpp-get-exe (am-buffer-file-name))))
 
-
 (defun cpp-run-buffer-file ()
   (interactive)
   (am-run (cpp-get-exe (am-buffer-file-name))))
-  
 
 (defun cpp-compile-run-buffer-file ()
   (interactive)
   (setq compilation-exit-callback (cpp-run-buffer-file))
   (cpp-compile-buffer-file))
 
-
 (defun cpp-generate-build-files ()
   (interactive)
   (am-run-in (cpp-generate-dir) cpp-generate-project-bin))
 
-
 (defun cpp-build-project (options)
   (interactive)
   (am-run-in (cpp-build-dir) cpp-build-bin options))
-  
 
 (defun cpp-run-project ()
   (interactive)
-  (am-run-in (cpp-build-dir) (concat cpp-build-output-bin cpp-run-default-file)))
-  
+  (am-run-in (concat (cpp-build-dir) cpp-build-output-bin) cpp-run-default-file))
 
 (defun cpp-build-project-default ()
   (interactive)
@@ -123,7 +116,7 @@
 
 (defun cpp-build-run-default ()
   (interactive)
-  (setq compilation-exit-callback 'cpp-run-project)
+  ;; (setq compilation-exit-callback 'cpp-run-project)
   (cpp-build-project-default))
 
 ;; Setup indentation style C++
