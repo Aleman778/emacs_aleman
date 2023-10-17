@@ -1,6 +1,6 @@
 ;;; config.el - Configs for compiling latex documents -*- lexical-binding: t; -*-
 
-(setq latex-main-file "main.tex") ; The main latex file to search for
+(setq latex-main-file "english.tex") ; The main latex file to search for
 
 (defun latex-dir ()
   (am-locate-file (am-buffer-path) latex-main-file))
@@ -8,7 +8,7 @@
 (defun compile-latex-pdf ()
   (interactive)
   (am-run-in (latex-dir) "pdflatex" "-halt-on-error" "-output-directory=out" 
-             "-aux-directory=temp" "main.tex"))
+             "-aux-directory=temp" latex-main-file))
 
 (defun compile-references-biber ()
   (interactive)
